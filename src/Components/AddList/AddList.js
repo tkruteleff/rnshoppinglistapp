@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -7,11 +7,42 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const AddList = () => {
+const AddList = props => {
+  const [enteredList, setEnteredList] = useState('');
+
+  const listInputHandler = enteredText => {
+    setEnteredList(enteredText);
+  };
+
+  const addListHandler = () => {
+    var today = new Date();
+    var day = String(today.getDate()).padStart(2, '0');
+    var month = String(today.getMonth() + 1).padStart(2, '0');
+    var year = today.getFullYear();
+
+    today = day + '.' + month + '.' + year;
+
+    const newList = {
+      id: Math.random(),
+      name: enteredList,
+      active: true,
+      dateCreated: today,
+    };
+
+    setEnteredList('');
+
+    props.onAddNewList(newList);
+  };
+
   return (
     <View>
-      <TextInput style={styles.textInput} placeholder="Grocery List" />
-      <TouchableOpacity style={styles.button}>
+      <TextInput
+        style={styles.textInput}
+        placeholder="Grocery List"
+        onChangeText={listInputHandler}
+        value={enteredList}
+      />
+      <TouchableOpacity style={styles.button} onPress={addListHandler}>
         <Text>ADD</Text>
       </TouchableOpacity>
     </View>
