@@ -1,15 +1,49 @@
-import React from 'react';
-import {StyleSheet, TouchableOpacity, Text, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
+
+import firestore from '@react-native-firebase/firestore';
 
 const ListView = props => {
+  const [loading, setLoading] = useState(true);
+  const [lists, setUsers] = useState([]);
+
   const openListHandler = () => {};
+
+  useEffect(() => {
+    const subscriber = firestore()
+      .collection('lists')
+      .onSnapshot(querySnapshot => {
+        const lists = [];
+
+        querySnapshot.forEach(documentSnapshot => {
+          lists.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
+        });
+
+        setUsers(lists);
+        setLoading(false)
+      });
+    return () => subscriber();
+  }, []);
+
+  if (loading) {
+    return <ActivityIndicator />;
+  }
 
   return (
     <>
       <Text style={styles.listsViewText}>Lists</Text>
       <FlatList
         style={styles.FlatList}
-        data={props.shoppingList}
+        data={lists}
         renderItem={({item}) => (
           <TouchableOpacity
             style={styles.FlatListView}

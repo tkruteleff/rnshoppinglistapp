@@ -4,11 +4,20 @@ import {StyleSheet, View, Text} from 'react-native';
 import AddList from './src/Components/AddList/AddList';
 import ListView from './src/Components/Lists/ListView/ListView';
 
+import firestore from '@react-native-firebase/firestore';
+
 const App: () => React$Node = () => {
   const [shoppingLists, setShoppingLists] = useState([]);
 
   const addListHandler = newList => {
     setShoppingLists(currentLists => [...currentLists, newList]);
+
+    firestore()
+      .collection('lists')
+      .add(newList)
+      .then(() => {
+        console.log('User added!');
+      });
   };
 
   return (
@@ -18,7 +27,7 @@ const App: () => React$Node = () => {
         <AddList onAddNewList={addListHandler} />
       </View>
       <View style={styles.listsView}>
-        <ListView shoppingList={shoppingLists} />
+        <ListView />
       </View>
     </View>
   );

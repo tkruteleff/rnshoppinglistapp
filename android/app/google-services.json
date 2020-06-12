@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "985416547908",
+    "firebase_url": "https://rn-shoppinglist-app.firebaseio.com",
+    "project_id": "rn-shoppinglist-app",
+    "storage_bucket": "rn-shoppinglist-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985416547908:android:ad10b4ff77d4444a954611",
+        "android_client_info": {
+          "package_name": "com.rnshoppinglistapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985416547908-df9ib88orth6qvrflogj0vouoi06fto2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7Qwd8nE1p2YA_tWxT2DSba4hxEdXN6oA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985416547908-df9ib88orth6qvrflogj0vouoi06fto2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
