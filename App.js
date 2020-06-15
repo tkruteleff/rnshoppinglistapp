@@ -1,5 +1,8 @@
+import 'react-native-gesture-handler';
 import React, {useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import AddList from './src/Components/AddList/AddList';
 import ListView from './src/Components/Lists/ListView/ListView';
@@ -8,6 +11,8 @@ import firestore from '@react-native-firebase/firestore';
 
 const App: () => React$Node = () => {
   const [shoppingLists, setShoppingLists] = useState([]);
+
+  const Stack = createStackNavigator();
 
   const addListHandler = newList => {
     setShoppingLists(currentLists => [...currentLists, newList]);
@@ -21,15 +26,17 @@ const App: () => React$Node = () => {
   };
 
   return (
-    <View style={styles.mainScreen}>
-      <Text style={styles.titleText}>Shopping List</Text>
-      <View>
-        <AddList onAddNewList={addListHandler} />
+    <NavigationContainer>
+      <View style={styles.mainScreen}>
+        <Text style={styles.titleText}>Shopping List</Text>
+        <View>
+          <AddList onAddNewList={addListHandler} />
+        </View>
+        <View style={styles.listsView}>
+          <ListView />
+        </View>
       </View>
-      <View style={styles.listsView}>
-        <ListView />
-      </View>
-    </View>
+    </NavigationContainer>
   );
 };
 

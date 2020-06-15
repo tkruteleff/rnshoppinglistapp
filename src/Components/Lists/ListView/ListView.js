@@ -11,7 +11,7 @@ import firestore from '@react-native-firebase/firestore';
 
 const ListView = props => {
   const [loading, setLoading] = useState(true);
-  const [lists, setUsers] = useState([]);
+  const [lists, setLists] = useState([]);
 
   const openListHandler = () => {};
 
@@ -28,8 +28,8 @@ const ListView = props => {
           });
         });
 
-        setUsers(lists);
-        setLoading(false)
+        setLists(lists);
+        setLoading(false);
       });
     return () => subscriber();
   }, []);
