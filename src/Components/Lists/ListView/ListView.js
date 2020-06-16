@@ -7,13 +7,16 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
+import Groceries from '../../../Screens/Groceries/Groceries';
 import firestore from '@react-native-firebase/firestore';
 
 const ListView = props => {
   const [loading, setLoading] = useState(true);
   const [lists, setLists] = useState([]);
 
-  const openListHandler = () => {};
+  const openListHandler = () => {
+    console.log('Hello world!');
+  };
 
   useEffect(() => {
     const subscriber = firestore()
