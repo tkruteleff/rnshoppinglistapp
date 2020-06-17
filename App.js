@@ -1,41 +1,23 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import AddList from './src/Components/AddList/AddList';
-import ListView from './src/Components/Lists/ListView/ListView';
-
-import firestore from '@react-native-firebase/firestore';
+import Lists from './src/Screens/Lists/Lists';
 
 const App: () => React$Node = () => {
-  const [shoppingLists, setShoppingLists] = useState([]);
-
-  const Stack = createStackNavigator();
-
-  const addListHandler = newList => {
-    setShoppingLists(currentLists => [...currentLists, newList]);
-
-    firestore()
-      .collection('lists')
-      .add(newList)
-      .then(() => {
-        console.log('User added!');
-      });
-  };
+  const Drawer = createDrawerNavigator();
 
   return (
     <NavigationContainer>
-      <View style={styles.mainScreen}>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={Lists} />
+      </Drawer.Navigator>
+      {/*<View style={styles.mainScreen}>
         <Text style={styles.titleText}>Shopping List</Text>
-        <View>
-          <AddList onAddNewList={addListHandler} />
-        </View>
-        <View style={styles.listsView}>
-          <ListView />
-        </View>
-      </View>
+        <Lists />
+      </View>*/}
     </NavigationContainer>
   );
 };
@@ -48,11 +30,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-  },
-  listsView: {
-    marginTop: 15,
-    marginLeft: 20,
-    marginRight: 20,
   },
 });
 
