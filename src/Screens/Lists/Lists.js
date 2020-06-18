@@ -21,18 +21,29 @@ const Lists = () => {
   };
 
   return (
-    <>
+    <View>
+      <View style={styles.mainScreen}>
+        <Text style={styles.titleText}>Shopping List</Text>
+      </View>
       <View>
         <AddList onAddNewList={addListHandler} />
       </View>
       <View style={styles.listsView}>
         <ListView />
       </View>
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  mainScreen: {
+    padding: 25,
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
   listsView: {
     marginTop: 15,
     marginLeft: 20,

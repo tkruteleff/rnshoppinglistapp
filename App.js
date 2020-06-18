@@ -22,15 +22,4 @@ const App: () => React$Node = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  mainScreen: {
-    padding: 25,
-  },
-  titleText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
-
 export default App;

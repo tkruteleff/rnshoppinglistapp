@@ -7,7 +7,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-import Groceries from '../../../Screens/Groceries/Groceries';
 import firestore from '@react-native-firebase/firestore';
 
 const ListView = props => {
