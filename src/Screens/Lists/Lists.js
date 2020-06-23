@@ -6,7 +6,7 @@ import ListView from '../../Components/Lists/ListView/ListView';
 
 import firestore from '@react-native-firebase/firestore';
 
-const Lists = () => {
+const Lists = props => {
   const [shoppingLists, setShoppingLists] = useState([]);
 
   const addListHandler = newList => {
@@ -16,7 +16,7 @@ const Lists = () => {
       .collection('lists')
       .add(newList)
       .then(() => {
-        console.log('User added!');
+        console.log('List added!');
       });
   };
 
@@ -29,7 +29,7 @@ const Lists = () => {
         <AddList onAddNewList={addListHandler} />
       </View>
       <View style={styles.listsView}>
-        <ListView />
+        <ListView navigation={props.navigation} />
       </View>
     </View>
   );

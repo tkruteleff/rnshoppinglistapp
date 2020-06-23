@@ -13,10 +13,6 @@ const ListView = props => {
   const [loading, setLoading] = useState(true);
   const [lists, setLists] = useState([]);
 
-  const openListHandler = () => {
-    console.log('Hello world!');
-  };
-
   useEffect(() => {
     const subscriber = firestore()
       .collection('lists')
@@ -49,7 +45,11 @@ const ListView = props => {
         renderItem={({item}) => (
           <TouchableOpacity
             style={styles.FlatListView}
-            onPress={openListHandler}>
+            onPress={() => {
+              props.navigation.navigate('Groceries', {
+                listName: item.name,
+              });
+            }}>
             <Text style={styles.FlatListViewText}>{item.name}</Text>
           </TouchableOpacity>
         )}

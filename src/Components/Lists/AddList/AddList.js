@@ -27,6 +27,7 @@ const AddList = props => {
       name: enteredList,
       active: true,
       dateCreated: today,
+      shoppingItems: [],
     };
 
     setEnteredList('');
