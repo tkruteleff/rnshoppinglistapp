@@ -47,6 +47,7 @@ const ListView = props => {
             style={styles.FlatListView}
             onPress={() => {
               props.navigation.navigate('Groceries', {
+                docId: lists,
                 listName: item.name,
               });
             }}>
