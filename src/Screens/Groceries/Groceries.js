@@ -7,20 +7,21 @@ import firestore from '@react-native-firebase/firestore';
 
 const Groceries = props => {
   const {listName} = props.route.params;
-  const {docId} = props.route.params.docId;
 
   const addItemHandler = newItem => {
-    console.log('Props here', props.route.params.docId);
-    console.log(newItem);
-    /*firestore()
+    const docId = props.route.params.docId[0].key.toString();
+    console.log('key', docId);
+    firestore()
       .collection('lists')
-      .doc('$docId')
+      .doc(docId)
       .update({
-        'shoppingItems': newItem,
+        shoppingItems: {
+          newItem,
+        },
       })
       .then(() => {
         console.log('Item updated');
-      });*/
+      });
   };
 
   return (
