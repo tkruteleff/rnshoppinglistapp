@@ -2,22 +2,21 @@ import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 
 import AddItems from './../../Components/Items/AddItems/AddItems';
+import ListItems from './../../Components/Items/ListItems/ListItems';
 
-import firestore from '@react-native-firebase/firestore';
+import firestore, { firebase } from '@react-native-firebase/firestore';
 
 const Groceries = props => {
   const {listName} = props.route.params;
+  const docId = props.route.params.docId[0].key.toString();
 
   const addItemHandler = newItem => {
     const docId = props.route.params.docId[0].key.toString();
-    console.log('key', docId);
     firestore()
       .collection('lists')
       .doc(docId)
       .update({
-        shoppingItems: {
-          newItem,
-        },
+        shoppingItems: firebase.firestore.FieldValue.arrayUnion(newItem),
       })
       .then(() => {
         console.log('Item updated');
@@ -28,6 +27,7 @@ const Groceries = props => {
     <View>
       <Text>{JSON.stringify(listName)}</Text>
       <AddItems onAddItemHandler={addItemHandler} />
+      <ListItems docId={docId} />
     </View>
   );
 };
