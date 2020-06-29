@@ -42,12 +42,14 @@ const ListView = props => {
       <FlatList
         style={styles.FlatList}
         data={lists}
-        renderItem={({item}) => (
+        renderItem={({item, index}) => (
           <TouchableOpacity
             style={styles.FlatListView}
+            {...item}
+            index={index}
             onPress={() => {
               props.navigation.navigate('Groceries', {
-                docId: lists,
+                docId: item,
                 listName: item.name,
               });
             }}>
