@@ -1,7 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, ActivityIndicator} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+} from 'react-native';
 
 import firestore from '@react-native-firebase/firestore';
+
+import ListItem from './ListItem/ListItem';
 
 const ListItems = props => {
   const [loading, setLoading] = useState(true);
@@ -12,19 +20,12 @@ const ListItems = props => {
       .collection('lists')
       .doc(props.docId)
       .onSnapshot(documentSnapshot => {
-        console.log('Item data', documentSnapshot.data());
-        const items = [];
-
-        documentSnapshot.forEach(documentSnapshot => {
-          items.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
-        });
+        const items = documentSnapshot.data().shoppingItems;
 
         setItems(items);
         setLoading(false);
       });
+
     return () => subscriber();
   }, [props.docId]);
 
@@ -34,18 +35,33 @@ const ListItems = props => {
 
   return (
     <View>
-      <Text>Hello World</Text>
       <FlatList
+        style={styles.FlatList}
         data={items}
         renderItem={({item}) => (
-          <View>
-            <Text>{item.name}</Text>
-            <Text>{item.amount}</Text>
-          </View>
+          <TouchableOpacity style={styles.FlatListView} id={item.id}>
+            <ListItem>{item.name.toUpperCase()}</ListItem>
+            <ListItem>{item.amount}</ListItem>
+          </TouchableOpacity>
         )}
+        keyExtractor={item => item.id}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  FlatList: {
+    width: '100%',
+    height: '100%',
+    marginTop: 5,
+  },
+  FlatListView: {
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+    padding: 5,
+  },
+});
 
 export default ListItems;

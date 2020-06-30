@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, ScrollView} from 'react-native';
 
 import AddItems from './../../Components/Items/AddItems/AddItems';
 import ListItems from './../../Components/Items/ListItems/ListItems';
@@ -25,13 +25,33 @@ const Groceries = props => {
 
   return (
     <View>
-      <Text>{JSON.stringify(listName)}</Text>
-      <AddItems onAddItemHandler={addItemHandler} />
-      <ListItems docId={docId} />
+      <View style={styles.mainScreen}>
+        <Text style={styles.titleText}>{JSON.stringify(listName)}</Text>
+      </View>
+      <View>
+        <AddItems onAddItemHandler={addItemHandler} />
+      </View>
+      <ScrollView style={styles.listsView}>
+        <ListItems docId={docId} />
+      </ScrollView>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  mainScreen: {
+    padding: 25,
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  listsView: {
+    marginTop: 15,
+    marginLeft: 20,
+    marginRight: 20,
+  },
+});
 
 export default Groceries;
