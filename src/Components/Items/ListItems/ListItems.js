@@ -29,6 +29,10 @@ const ListItems = props => {
     return () => subscriber();
   }, [props.docId]);
 
+  const checkItemHandler = () => {
+    console.log('Hello from checkItemHandler');
+  };
+
   if (loading) {
     return <ActivityIndicator />;
   }
@@ -38,8 +42,13 @@ const ListItems = props => {
       <FlatList
         style={styles.FlatList}
         data={items}
-        renderItem={({item}) => (
-          <TouchableOpacity style={styles.FlatListView} id={item.id}>
+        renderItem={({item, index}) => (
+          <TouchableOpacity
+            style={styles.FlatListView}
+            {...item}
+            index={index}
+            id={item.id}
+            onPress={checkItemHandler}>
             <ListItem>{item.name.toUpperCase()}</ListItem>
             <ListItem>{item.amount}</ListItem>
           </TouchableOpacity>

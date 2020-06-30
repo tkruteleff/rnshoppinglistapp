@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text, ScrollView} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 
 import AddItems from './../../Components/Items/AddItems/AddItems';
 import ListItems from './../../Components/Items/ListItems/ListItems';
@@ -12,6 +12,8 @@ const Groceries = props => {
 
   const addItemHandler = newItem => {
     const docId = props.route.params.docId.key.toString();
+    
+    // Currently posts arrays into shoppingItems array. Should be objects.
     firestore()
       .collection('lists')
       .doc(docId)
@@ -31,9 +33,9 @@ const Groceries = props => {
       <View>
         <AddItems onAddItemHandler={addItemHandler} />
       </View>
-      <ScrollView style={styles.listsView}>
+      <View style={styles.listsView}>
         <ListItems docId={docId} />
-      </ScrollView>
+      </View>
     </View>
   );
 };
