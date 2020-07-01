@@ -21,7 +21,7 @@ const AddItems = props => {
 
   const addItemHandler = () => {
     // eslint-disable-next-line prettier/prettier
-    const itemId = (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    const itemId = (((1+Math.random()) * 0x10000)|0).toString(16).substring(1);
 
     const newItem = {
       id: itemId,

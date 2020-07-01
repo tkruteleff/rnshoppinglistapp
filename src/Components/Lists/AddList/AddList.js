@@ -23,11 +23,9 @@ const AddList = props => {
     today = day + '.' + month + '.' + year;
 
     const newList = {
-      id: Math.random(),
       name: enteredList,
       active: true,
       dateCreated: today,
-      shoppingItems: [],
     };
 
     setEnteredList('');

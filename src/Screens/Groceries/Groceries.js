@@ -12,9 +12,9 @@ const Groceries = props => {
 
   const addItemHandler = newItem => {
     const docId = props.route.params.docId.key.toString();
-    
+
     // Currently posts arrays into shoppingItems array. Should be objects.
-    firestore()
+    /*firestore()
       .collection('lists')
       .doc(docId)
       .update({
@@ -22,6 +22,14 @@ const Groceries = props => {
       })
       .then(() => {
         console.log('Item updated on ', docId);
+      });*/
+    firestore()
+      .collection('lists')
+      .doc(docId)
+      .collection('shoppingItems')
+      .add(newItem)
+      .then(() => {
+        console.log('Subcollection added');
       });
   };
 

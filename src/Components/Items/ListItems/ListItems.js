@@ -19,18 +19,35 @@ const ListItems = props => {
     const subscriber = firestore()
       .collection('lists')
       .doc(props.docId)
-      .onSnapshot(documentSnapshot => {
-        const items = documentSnapshot.data().shoppingItems;
+      .collection('shoppingItems')
+      .onSnapshot(querySnapshot => {
+        const items = [];
+
+        querySnapshot.forEach(documentSnapshot => {
+          items.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
+        });
 
         setItems(items);
         setLoading(false);
       });
-
     return () => subscriber();
   }, [props.docId]);
 
-  const checkItemHandler = () => {
-    console.log('Hello from checkItemHandler');
+  const checkItemHandler = item => {
+    firestore()
+      .collection('lists')
+      .doc(props.docId)
+      .collection('shoppingItems')
+      .doc(item.key)
+      .update({
+        checked: true,
+      })
+      .then(() => {
+        console.log('checked updated for ', item.key);
+      });
   };
 
   if (loading) {
@@ -48,12 +65,12 @@ const ListItems = props => {
             {...item}
             index={index}
             id={item.id}
-            onPress={checkItemHandler}>
+            onPress={() => checkItemHandler(item)}>
             <ListItem>{item.name.toUpperCase()}</ListItem>
             <ListItem>{item.amount}</ListItem>
           </TouchableOpacity>
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.key}
       />
     </View>
   );
