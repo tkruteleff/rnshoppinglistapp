@@ -3,6 +3,7 @@ import {View, StyleSheet, Text} from 'react-native';
 
 import AddList from '../../Components/Lists/AddList/AddList';
 import ListView from '../../Components/Lists/ListView/ListView';
+import Wrapper from './../../hoc/Wrapper';
 
 import firestore from '@react-native-firebase/firestore';
 
@@ -23,6 +24,7 @@ const Lists = props => {
   return (
     <View>
       <View style={styles.mainScreen}>
+        <Wrapper navigate={props.navigation} />
         <Text style={styles.titleText}>Shopping List</Text>
       </View>
       <View>

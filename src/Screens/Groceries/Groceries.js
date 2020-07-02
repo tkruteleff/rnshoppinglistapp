@@ -3,6 +3,7 @@ import {View, StyleSheet, Text} from 'react-native';
 
 import AddItems from './../../Components/Items/AddItems/AddItems';
 import ListItems from './../../Components/Items/ListItems/ListItems';
+import Wrapper from './../../hoc/Wrapper';
 
 import firestore, {firebase} from '@react-native-firebase/firestore';
 
@@ -35,6 +36,7 @@ const Groceries = props => {
 
   return (
     <View>
+      <Wrapper navigate={props.navigation} />
       <View style={styles.mainScreen}>
         <Text style={styles.titleText}>{JSON.stringify(listName)}</Text>
       </View>

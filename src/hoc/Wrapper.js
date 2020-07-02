@@ -1,14 +1,26 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 
-const Wrapper = () => {
+const Wrapper = props => {
+  const openDrawerHandler = () => {
+    props.navigate.openDrawer();
+  };
+
   return (
-    <View>
-      <Text>Hello World</Text>
-    </View>
+    <TouchableOpacity style={styles.main} onPress={openDrawerHandler}>
+      <Text style={styles.textStyle}>____</Text>
+      <Text style={styles.textStyle}>____</Text>
+      <Text style={styles.textStyle}>____</Text>
+    </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  textStyle: {
+    fontWeight: 'bold',
+    fontSize: 12,
+    marginBottom: -9,
+  },
+});
 
 export default Wrapper;
