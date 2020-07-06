@@ -5,6 +5,7 @@ import {
   FlatList,
   ActivityIndicator,
   StyleSheet,
+  ScrollView,
 } from 'react-native';
 
 import firestore from '@react-native-firebase/firestore';
@@ -14,6 +15,7 @@ import ListItem from './ListItem/ListItem';
 const ListItems = props => {
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
+  const [checked, setChecked] = useState(true);
 
   useEffect(() => {
     const subscriber = firestore()
@@ -53,6 +55,14 @@ const ListItems = props => {
   if (loading) {
     return <ActivityIndicator />;
   }
+
+  const deleteItemHandler = item => {
+    // Delete item function here
+  };
+
+  const updateItemHandler = item => {
+    // Update item function here
+  };
 
   return (
     <View>

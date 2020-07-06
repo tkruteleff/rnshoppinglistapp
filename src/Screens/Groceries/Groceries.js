@@ -14,16 +14,6 @@ const Groceries = props => {
   const addItemHandler = newItem => {
     const docId = props.route.params.docId.key.toString();
 
-    // Currently posts arrays into shoppingItems array. Should be objects.
-    /*firestore()
-      .collection('lists')
-      .doc(docId)
-      .update({
-        shoppingItems: firebase.firestore.FieldValue.arrayUnion(newItem),
-      })
-      .then(() => {
-        console.log('Item updated on ', docId);
-      });*/
     firestore()
       .collection('lists')
       .doc(docId)
