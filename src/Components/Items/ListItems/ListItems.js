@@ -58,6 +58,15 @@ const ListItems = props => {
 
   const deleteItemHandler = item => {
     // Delete item function here
+    firestore()
+      .collection('lists')
+      .doc(props.docId)
+      .collection('shoppingItems')
+      .doc(item.key)
+      .delete()
+      .then(() => {
+        console.log('Item deleted ', item.key);
+      });
   };
 
   const updateItemHandler = item => {
