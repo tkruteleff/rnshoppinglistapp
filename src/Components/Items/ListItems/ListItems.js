@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {
   View,
-  TouchableOpacity,
   FlatList,
   ActivityIndicator,
   StyleSheet,
-  ScrollView,
+  Text,
 } from 'react-native';
 
 import firestore from '@react-native-firebase/firestore';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import ListItem from './ListItem/ListItem';
 
@@ -16,6 +17,14 @@ const ListItems = props => {
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
   const [checked, setChecked] = useState(true);
+
+  const renderLeftActions = (progress, dragX) => {
+    return (
+      <View style={styles.leftAction}>
+        <Text style={styles.actionText}>Delete item</Text>
+      </View>
+    );
+  };
 
   useEffect(() => {
     const subscriber = firestore()
@@ -71,6 +80,7 @@ const ListItems = props => {
 
   const updateItemHandler = item => {
     // Update item function here
+    console.log('Hello from updateItemHandler');
   };
 
   return (
@@ -79,15 +89,17 @@ const ListItems = props => {
         style={styles.FlatList}
         data={items}
         renderItem={({item, index}) => (
-          <TouchableOpacity
-            style={styles.FlatListView}
-            {...item}
-            index={index}
-            id={item.id}
-            onPress={() => checkItemHandler(item)}>
-            <ListItem>{item.name.toUpperCase()}</ListItem>
-            <ListItem>{item.amount}</ListItem>
-          </TouchableOpacity>
+          <Swipeable renderLeftActions={renderLeftActions}>
+            <TouchableOpacity
+              style={styles.FlatListView}
+              {...item}
+              index={index}
+              id={item.id}
+              onPress={() => checkItemHandler(item)}>
+              <ListItem>{item.name.toUpperCase()}</ListItem>
+              <ListItem>{item.amount}</ListItem>
+            </TouchableOpacity>
+          </Swipeable>
         )}
         keyExtractor={item => item.key}
       />
@@ -106,6 +118,16 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 5,
     padding: 5,
+  },
+  leftAction: {
+    backgroundColor: '#388e3c',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  actionText: {
+    color: '#fff',
+    fontWeight: '600',
+    padding: 20,
   },
 });
 
