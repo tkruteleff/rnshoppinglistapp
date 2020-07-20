@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 15,
     fontWeight: 'bold',
-    textAlign: 'center',
+    textAlign: 'left',
   },
   FlatListView: {
     padding: 5,

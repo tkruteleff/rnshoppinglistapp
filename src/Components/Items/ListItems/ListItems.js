@@ -74,7 +74,7 @@ const ListItems = props => {
         data={items}
         renderItem={({item, index}) => (
           <ListItem>
-            {item.name}
+            {item.name.toUpperCase()}
             {item.amount}
           </ListItem>
           /*<Swipeable
